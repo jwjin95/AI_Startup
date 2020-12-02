@@ -15,7 +15,9 @@ const s3 = new AWS.S3();
 
 
 router.get('/', function(req, res, next) {
+    var obj = new Object();
     let json = [];
+    obj.image_info = json;
     s3.listObjects({Bucket: 'team01-public'}, function(err, data) {
         if (err) {
           console.log("Error", err);
@@ -28,11 +30,9 @@ router.get('/', function(req, res, next) {
             'URL': 'https://team01-public.s3.ap-northeast-2.amazonaws.com/'+data.Contents[image].Key
             });  
         }
-        console.log(json);
-        res.json(json);
+        console.log(obj);
+        res.json(obj);
     });
-      
-    
   });
 
 const storage = multerS3({

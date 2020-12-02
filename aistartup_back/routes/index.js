@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const app = express();
-const { upload } = require('./upload');
+const { list } = require('./list');
 require('dotenv').config();
 
 // app.post('/uploadOne', upload.single('img'), (req, res) => {
