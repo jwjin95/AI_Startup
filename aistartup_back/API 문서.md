@@ -1,3 +1,3 @@
-GET /list \n
-request 없음 \n
+GET /list 
+request 없음 
 respond 
