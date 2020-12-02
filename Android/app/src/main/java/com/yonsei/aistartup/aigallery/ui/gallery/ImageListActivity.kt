@@ -2,23 +2,31 @@ package com.yonsei.aistartup.aigallery.ui.gallery
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.yonsei.aistartup.aigallery.R
-import com.yonsei.aistartup.aigallery.model.ImageData
+import com.yonsei.aistartup.aigallery.model.network.ImageRepository
+import com.yonsei.aistartup.aigallery.model.network.base.ApiStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ImageListActivity : AppCompatActivity() {
-    private val adapter by lazy{
-        GridAdapter().apply {
-            setData(ImageData.getSampleList())
-        }
-    }
+    private val adapter by lazy { GridAdapter() }
+
+    private val repository by lazy { ImageRepository() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         recyclerview_main.layoutManager = GridLayoutManager(this, 2)
         recyclerview_main.adapter = adapter
+
+        repository.getList().observe(this, Observer {
+            when (it) {
+                is ApiStatus.Success -> {
+                    adapter.setData(it.data.list)
+                }
+            }
+        })
     }
 }
