@@ -1,0 +1,23 @@
+GET /list  
+request 없음   
+respond 
+--------
+image_info -> Object
+
+ex) 
+{
+  image_info: [
+    {
+      name: 'a.png',
+      URL: 'https://team01-public.s3.ap-northeast-2.amazonaws.com/a.png'
+    },
+    {
+      name: '다운로드 (1).jpg',
+      URL: 'https://team01-public.s3.ap-northeast-2.amazonaws.com/다운로드 (1).jpg'
+    },
+    {
+      name: '다운로드.jpg',
+      URL: 'https://team01-public.s3.ap-northeast-2.amazonaws.com/다운로드.jpg'
+    }
+  ]
+}
