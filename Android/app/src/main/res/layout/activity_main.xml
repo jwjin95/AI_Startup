@@ -6,13 +6,100 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <TextView
-            android:layout_width="wrap_content"
+
+    <ScrollView
+            android:id="@+id/scrollview_main_search"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진사진사진" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그림그림그림" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영상영상영상" />
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진사진사진" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그림그림그림" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영상영상영상" />
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="사진사진사진" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그림그림그림" />
+
+            <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_main_search_9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영상영상영상" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </ScrollView>
+    <!--    <Button-->
+    <!--            android:id="@+id/button_main_search"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="검색"-->
+    <!--            app:layout_constraintRight_toRightOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--    <EditText-->
+    <!--            android:id="@+id/textview_main_search"-->
+    <!--            android:layout_width="0dp"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="10dp"-->
+    <!--            android:lines="1"-->
+    <!--            android:scrollHorizontally="true"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            app:layout_constraintRight_toLeftOf="@+id/button_main_search"-->
+    <!--            app:layout_constraintTop_toTopOf="@id/button_main_search" />-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_main"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/scrollview_main_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
