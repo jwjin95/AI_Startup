@@ -50,15 +50,25 @@ router.get('/:search', function(req, res, next) {
         input: s3.getObject(params).createReadStream()
     });
 
-    rl.on('line', function(line){
-        console.log(line);
-        if(line.includes('1.png')) console.log("good");
+    var lineReader = require('readline').createInterface({
+        input: s3.getObject(params).createReadStream()
     })
-
-    rl.on('line', function(line){
-        console.log(line);
-        if(line.includes(label)) console.log("good");
+    console.log("1");
+    lineReader.on('line', function(line) {
+        console.log(line)
+        if(line.includes(label)){
+            console.log("sushi gg");
+            json.push({
+                'path': line.split(",")[0],
+                'label': label
+            });
+        }
     })
+    lineReader.on('close', function(){
+        res.json(obj);
+        console.log(obj)
+    })
+    
 
 });
 
