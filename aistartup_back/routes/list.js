@@ -46,18 +46,15 @@ router.get('/:search', function(req, res, next) {
     const label = req.params.search;
 
     var params = {Bucket: 'team01-public', Key: 'image_info.csv'};
-    const rl = readline.createInterface({
-        input: s3.getObject(params).createReadStream()
-    });
+
 
     var lineReader = require('readline').createInterface({
         input: s3.getObject(params).createReadStream()
     })
-    console.log("1");
+
     lineReader.on('line', function(line) {
         console.log(line)
         if(line.includes(label)){
-            console.log("sushi gg");
             json.push({
                 'path': line.split(",")[0],
                 'label': label
@@ -66,7 +63,7 @@ router.get('/:search', function(req, res, next) {
     })
     lineReader.on('close', function(){
         res.json(obj);
-        console.log(obj)
+
     })
     
 
