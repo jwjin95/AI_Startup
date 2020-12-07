@@ -2,7 +2,7 @@ var express = require('express');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const AWS = require("aws-sdk");
-const { json } = require('express');
+const {json} = require('express');
 const router = express.Router();
 require('dotenv').config();
 
@@ -14,36 +14,38 @@ AWS.config.update({
 const s3 = new AWS.S3();
 
 
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     var obj = new Object();
     let json = [];
     obj.image_info = json;
-    s3.listObjects({Bucket: 'team01-public'}, function(err, data) {
+    s3.listObjects({Bucket: 'team01-public'}, function (err, data) {
         if (err) {
-          console.log("Error", err);
+            console.log("Error", err);
         } else {
-          console.log("Success", data.Contents);
+            console.log("Success", data.Contents);
         }
-        for(image in data.Contents){
+        for (image in data.Contents) {
+            const key = data.Contents[image].Key;
+            if (key.substr(key.length - 4, 4) === ".csv") continue;
             json.push({
-            'name': data.Contents[image].Key, 
-            'URL': 'https://team01-public.s3.ap-northeast-2.amazonaws.com/'+data.Contents[image].Key
-            });  
+                'name': key,
+                'URL': 'https://team01-public.s3.ap-northeast-2.amazonaws.com/' + key
+            });
         }
         console.log(obj);
         res.json(obj);
     });
-  });
+});
 
 const storage = multerS3({
-    s3:s3,
+    s3: s3,
     bucket: 'team01-public',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: 'public-read',
-    metadata: function(req, file, cb) {
-        cb(null, { fieldName: file.fieldname})
+    metadata: function (req, file, cb) {
+        cb(null, {fieldName: file.fieldname})
     },
-    key: function(req, file, cb) {
+    key: function (req, file, cb) {
         cb(null, 'uploads/${Date.now()}_${file.originalname}')
     },
 })
@@ -72,4 +74,4 @@ const storage = multerS3({
 //   }
 // });
 module.exports = router;
-exports.upload = multer({ storage: storage });
+exports.upload = multer({storage: storage});
