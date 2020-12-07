@@ -21,3 +21,20 @@ ex)
     }
   ]
 }
+
+GET /list/:search
+request search
+respond
+--------
+image_info -> Object
+
+ex)
+{
+  image_info: [
+    {
+      path: 'https://team01-public.s3.ap-northeast-2.amazonaws.com/a.png',
+      label: '스시'
+    }
+  ]
+}
+
