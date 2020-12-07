@@ -56,7 +56,7 @@ router.get('/:search', function(req, res, next) {
         console.log(line)
         if(line.includes(label)){
             json.push({
-                'path': line.split(",")[0],
+                'URL': 'https://team01-public.s3.ap-northeast-2.amazonaws.com/'+ line.split(",")[0],
                 'label': label
             });
         }
