@@ -1,12 +1,15 @@
 package com.yonsei.aistartup.aigallery.model.network.base
 
 import com.yonsei.aistartup.aigallery.BuildConfig
+import com.yonsei.aistartup.aigallery.model.network.ImageRepository
+import com.yonsei.aistartup.aigallery.model.network.ImageRetrofit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RestClient {
+    fun getImageService(): ImageRetrofit = retrofit.create(ImageRetrofit::class.java)
 
     private val retrofit =
         Retrofit.Builder().run {
@@ -20,8 +23,7 @@ object RestClient {
                 build()
             }
 
-//            baseUrl("http://192.168.0.9:3000") // 도메인 주소
-            baseUrl("3.35.139.156:8000/") // 도메인 주소
+            baseUrl("http://aistarup-01-dev.ap-northeast-2.elasticbeanstalk.com") // 도메인 주소
             client(client)
 
             addCallAdapterFactory(LiveDataCallAdapter.Factory())
