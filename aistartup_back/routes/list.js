@@ -4,6 +4,8 @@ const multerS3 = require('multer-s3');
 const AWS = require("aws-sdk");
 const { json } = require('express');
 const router = express.Router();
+const fs = require('fs');
+const readline = require('readline');
 require('dotenv').config();
 
 AWS.config.update({
@@ -34,6 +36,30 @@ router.get('/', function(req, res, next) {
         res.json(obj);
     });
   });
+
+router.get('/:search', function(req, res, next) {
+    var obj = new Object();
+    let json = [];
+    obj.image_info = json;
+    const label = req.params.search;
+
+    var params = {Bucket: 'team01-public', Key: 'image_info.csv'};
+    const rl = readline.createInterface({
+        input: s3.getObject(params).createReadStream()
+    });
+
+    rl.on('line', function(line){
+        console.log(line);
+        if(line.includes('1.png')) console.log("good");
+    })
+
+    rl.on('line', function(line){
+        console.log(line);
+        if(line.includes(label)) console.log("good");
+    })
+
+});
+
 
 const storage = multerS3({
     s3:s3,
